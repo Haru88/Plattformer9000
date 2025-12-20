@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		acceleration = 0
 		
 func is_pressing_against_wall() -> bool:
-	return Input.is_action_just_pressed("Right") and rayCastR.is_colliding() or Input.is_action_just_pressed("Left") and rayCastR.is_colliding()
+	return (Input.is_action_pressed("Right") and rayCastR.is_colliding()) or (Input.is_action_pressed("Left") and rayCastL.is_colliding())
 
 func is_falling() -> bool:
 	return velocity.y > 0

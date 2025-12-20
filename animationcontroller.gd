@@ -17,7 +17,12 @@ func _process(delta: float) -> void:
 			self.play("idle")
 
 	if not player.is_on_floor():
-		if player.velocity.y < 0:
+		self.scale.x = 1.0 if player.acceleration > 0 else -1.0
+		if player.is_on_wall() && player.is_falling() && player.is_pressing_against_wall():
+			self.play("wall")
+			return
+		if not player.is_falling():
 			self.play("jump")
 		else:
 			self.play("Fall")
+			

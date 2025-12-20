@@ -343,10 +343,10 @@ stream = ExtResource("4_qkqpl")
 volume_db = -43.281
 
 [node name="RayR" type="RayCast2D" parent="."]
-target_position = Vector2(10, 0)
+target_position = Vector2(12, 0)
 
 [node name="RayL" type="RayCast2D" parent="."]
-target_position = Vector2(-10, 0)
+target_position = Vector2(-12, 0)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("9_f1ek2")

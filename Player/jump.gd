@@ -1,9 +1,11 @@
 extends State
 
 func enter():
+	player.audioPlayer.play()
 	player.velocity.y -= player.jumpSpeed
 	
 func doWallJump():
+	print(player.is_pressing_against_wall())
 	if player.is_on_wall() && player.is_falling() && player.is_pressing_against_wall():
 		player.velocity.y = 30
 		

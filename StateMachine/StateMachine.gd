@@ -1,15 +1,17 @@
-extends Node
+class_name StateMachine extends Node
 
 @export var start_state: NodePath
 var current_state: State
+var stateName: StringName = PlayerStates.IDLE
 
 func _ready():
 	current_state = get_node(start_state)
 	current_state.state_machine = self
 	current_state.player = get_parent() as CharacterBody2D
 	current_state.enter()
-
+	
 func change_state(state_name: String):
+	stateName = state_name
 	var new_state = get_node(state_name) as State
 	if new_state == current_state:
 		return

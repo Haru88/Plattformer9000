@@ -18,7 +18,7 @@ var max_acceleration_run = 10000
 	
 func _physics_process(delta: float) -> void:
 	
-	var direction = Input.get_axis("Left", "Right")
+	var direction = Input.get_axis(Controls.LEFT, Controls.RIGHT)
 	if(direction != 0):
 		lastDirection = direction
 	
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		acceleration = 0
 		
 func is_pressing_against_wall() -> bool:
-	return (Input.is_action_pressed("Right") and rayCastR.is_colliding()) or (Input.is_action_pressed("Left") and rayCastL.is_colliding())
+	return (Input.is_action_pressed(Controls.RIGHT) and rayCastR.is_colliding()) or (Input.is_action_pressed(Controls.LEFT) and rayCastL.is_colliding())
 
 func is_falling() -> bool:
 	return velocity.y > 0

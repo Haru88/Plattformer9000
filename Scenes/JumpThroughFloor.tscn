@@ -19,6 +19,7 @@ region_rect = Rect2(272, 16, 48, 5)
 
 [node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("jumpThroughBody")]
 position = Vector2(0, -5)
+collision_mask = 2
 script = ExtResource("2_bx6ij")
 jumpThroughBody = NodePath("../StaticBody2D/CollisionShape2D")
 

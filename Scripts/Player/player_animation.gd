@@ -15,8 +15,8 @@ func _process(delta: float) -> void:
 		if STATEMACHINE.stateName == PlayerStates.RUN:
 			ANIMATION.play("walk")
 			
-			if Input.is_action_just_pressed("jump") :
-				ANIMATION.speed_scale = 2.0
+			if Input.is_action_pressed(Controls.RUN) :
+				ANIMATION.speed_scale = 1.5
 			else:
 				ANIMATION.speed_scale = 1.0
 		else :

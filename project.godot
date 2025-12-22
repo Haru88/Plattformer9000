@@ -17,7 +17,7 @@ config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-PlayerStates="*res://Scripts/Globals/entityStates.gd"
+PlayerStates="*res://Scripts/Globals/entity_states.gd"
 Controls="*res://Scripts/Globals/controls.gd"
 
 [display]

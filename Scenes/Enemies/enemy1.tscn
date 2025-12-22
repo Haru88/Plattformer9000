@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bggpaqv7eicia" path="res://Scripts/Enemies/Enemy1/enemy1_head_hitbox.gd" id="4_287tu"]
 [ext_resource type="Script" uid="uid://ctu0gbfv05t2w" path="res://Scripts/StateMachine/StateMachine.gd" id="6_ghaa6"]
 [ext_resource type="Script" uid="uid://b56ycr2g1cgoo" path="res://Scripts/Enemies/Enemy1/enemy1_walk.gd" id="7_mvm2m"]
-[ext_resource type="Script" uid="uid://cfoe35ti57pq4" path="res://Scripts/Enemies/Enemy1/enemy1_die.gd" id="8_mr2vc"]
+[ext_resource type="Script" uid="uid://cfoe35ti57pq4" path="res://Scripts/Enemies/Enemy1/enemy1_death.gd" id="8_mr2vc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1f0kj"]
 height = 26.0
@@ -199,7 +199,7 @@ start_state = NodePath("Walk")
 [node name="Walk" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("7_mvm2m")
 
-[node name="Die" type="Node" parent="EnemyStateMachine"]
+[node name="Death" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("8_mr2vc")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

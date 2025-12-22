@@ -6,7 +6,7 @@ func _ready():
 	jumpThroughBody.set_deferred("disabled", true)
 	
 func _process(delta):
-	if !jumpThroughBody.disabled and Input.is_action_pressed("down"):
+	if !jumpThroughBody.disabled and Input.is_action_pressed(Controls.DOWN):
 		jumpThroughBody.set_deferred("disabled", true)
 
 func _on_body_entered(body: Node2D) -> void:

@@ -1,8 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://cn6jmbdcbwyjc"]
+[gd_scene load_steps=30 format=3 uid="uid://cn6jmbdcbwyjc"]
 
-[ext_resource type="Script" uid="uid://desvj5uf7shsx" path="res://enemy/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Script" uid="uid://desvj5uf7shsx" path="res://Scripts/Enemies/Enemy1/enemy1.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://cqkly27bclugg" path="res://Assets/Enemies/AngryPig/Run (36x30).png" id="1_hghv2"]
-[ext_resource type="Script" uid="uid://bhen6q87f4rxh" path="res://enemy/enemy_hitbox.gd" id="3_afpow"]
+[ext_resource type="Texture2D" uid="uid://g26vo1r14hp3" path="res://Assets/Enemies/AngryPig/Hit 1 (36x30).png" id="3_0830c"]
+[ext_resource type="Script" uid="uid://bhen6q87f4rxh" path="res://Scripts/Enemies/Enemy1/enemy1_body_hitbox.gd" id="3_afpow"]
+[ext_resource type="Script" uid="uid://bggpaqv7eicia" path="res://Scripts/Enemies/Enemy1/enemy1_head_hitbox.gd" id="4_287tu"]
+[ext_resource type="Script" uid="uid://ctu0gbfv05t2w" path="res://Scripts/StateMachine/StateMachine.gd" id="6_ghaa6"]
+[ext_resource type="Script" uid="uid://b56ycr2g1cgoo" path="res://Scripts/Enemies/Enemy1/enemy1_walk.gd" id="7_mvm2m"]
+[ext_resource type="Script" uid="uid://cfoe35ti57pq4" path="res://Scripts/Enemies/Enemy1/enemy1_die.gd" id="8_mr2vc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1f0kj"]
 height = 26.0
@@ -55,6 +60,26 @@ region = Rect2(360, 0, 36, 30)
 atlas = ExtResource("1_hghv2")
 region = Rect2(396, 0, 36, 30)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt4ob"]
+atlas = ExtResource("3_0830c")
+region = Rect2(0, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgeoe"]
+atlas = ExtResource("3_0830c")
+region = Rect2(36, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk7xo"]
+atlas = ExtResource("3_0830c")
+region = Rect2(72, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scl1n"]
+atlas = ExtResource("3_0830c")
+region = Rect2(108, 0, 36, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhkrs"]
+atlas = ExtResource("3_0830c")
+region = Rect2(144, 0, 36, 30)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_vt4ob"]
 animations = [{
 "frames": [{
@@ -97,10 +122,33 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt4ob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgeoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk7xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scl1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhkrs")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
-size = Vector2(24, 20)
+size = Vector2(24, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
+size = Vector2(26, 12)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("RIGHT_FLOOR", "LEFT_FLOOR", "ANIMATION")]
 collision_layer = 4
@@ -115,9 +163,9 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_1f0kj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vt4ob")
-animation = &"Run"
-frame_progress = 0.21655217
+animation = &"die"
 
 [node name="RayRightEnd" type="RayCast2D" parent="."]
 position = Vector2(15, -1)
@@ -133,6 +181,26 @@ collision_mask = 4
 script = ExtResource("3_afpow")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_287tu")
 
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(0, -9)
+script = ExtResource("4_287tu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_0830c")
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+script = ExtResource("6_ghaa6")
+start_state = NodePath("Walk")
+
+[node name="Walk" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("7_mvm2m")
+
+[node name="Die" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("8_mr2vc")
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]

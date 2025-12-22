@@ -13,8 +13,8 @@ func _ready():
 func change_state(state_name: String):
 	stateName = state_name
 	var new_state = get_node(state_name) as State
-	if new_state == current_state:
-		return
+	#if new_state == current_state:
+		#return
 
 	current_state.exit()
 	current_state = new_state

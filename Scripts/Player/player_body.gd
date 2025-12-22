@@ -1,21 +1,22 @@
 class_name Player extends CharacterBody2D
 
-@export var walkSpeed: float = 5000
-@export var jumpSpeed: float = 330
-@export var audioPlayer: AudioStreamPlayer
-@export var rayCastR: RayCast2D
+@export_group("Refs")
 @export var rayCastL: RayCast2D
+@export var rayCastR: RayCast2D
+@export var audioPlayer: AudioStreamPlayer
+
+@export_group("PlayerStats")
+@export var walkSpeed = 5000
+@export var jumpSpeed = 330
+@export var friction = 300
+@export var acceleration_step = 600
+@export var acceleration_run = 400
+@export var max_acceleration = 5000
+@export var max_acceleration_run = 10000
 
 var acceleration = 0
-var acceleration_step = 600
-var max_acceleration = 5000
-var friction = 300
-
 var lastDirection = 1.0
 
-var acceleration_run = 400
-var max_acceleration_run = 10000
-	
 func _physics_process(delta: float) -> void:
 	
 	var direction = Input.get_axis(Controls.LEFT, Controls.RIGHT)

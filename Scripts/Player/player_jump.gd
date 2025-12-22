@@ -2,7 +2,7 @@ extends State
 
 func enter():
 	player.audioPlayer.play()
-	player.velocity.y -= player.jumpSpeed
+	player.velocity.y = -player.jumpSpeed
 	
 func doWallJump():
 	if player.is_on_wall() && player.is_falling() && player.is_pressing_against_wall():
@@ -14,6 +14,7 @@ func doWallJump():
 			player.velocity.y -= player.jumpSpeed
 			
 func physics_process(delta):	
+	#short_jump
 	if Input.is_action_just_released(Controls.JUMP):
 		player.velocity.y *= 0.5
 		

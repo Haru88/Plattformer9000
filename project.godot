@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Plattformer 9000"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/Maps/Map1.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-PlayerStates="*res://Globals/playerStates.gd"
-Controls="*res://Globals/controls.gd"
+PlayerStates="*res://Scripts/Globals/entityStates.gd"
+Controls="*res://Scripts/Globals/controls.gd"
 
 [display]
 

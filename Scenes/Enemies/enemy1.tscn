@@ -9,9 +9,6 @@
 [ext_resource type="Script" uid="uid://b56ycr2g1cgoo" path="res://Scripts/Enemies/Enemy1/enemy1_walk.gd" id="7_mvm2m"]
 [ext_resource type="Script" uid="uid://cfoe35ti57pq4" path="res://Scripts/Enemies/Enemy1/enemy1_death.gd" id="8_mr2vc"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1f0kj"]
-height = 26.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_afpow"]
 atlas = ExtResource("1_hghv2")
 region = Rect2(0, 0, 36, 30)
@@ -140,9 +137,12 @@ animations = [{
 "texture": SubResource("AtlasTexture_dhkrs")
 }],
 "loop": true,
-"name": &"die",
-"speed": 5.0
+"name": &"death",
+"speed": 15.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1f0kj"]
+height = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
 size = Vector2(24, 17)
@@ -158,14 +158,10 @@ RIGHT_FLOOR = NodePath("RayRightEnd")
 LEFT_FLOOR = NodePath("RayLeftEnd")
 ANIMATION = NodePath("AnimatedSprite2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
-shape = SubResource("CapsuleShape2D_1f0kj")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vt4ob")
-animation = &"die"
+animation = &"death"
 
 [node name="RayRightEnd" type="RayCast2D" parent="."]
 position = Vector2(15, -1)
@@ -177,18 +173,23 @@ position = Vector2(-14, 0)
 target_position = Vector2(0, 16)
 collision_mask = 4
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionTerrain" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_1f0kj")
+
+[node name="CollisionHead" type="Area2D" parent="."]
 script = ExtResource("3_afpow")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionHead"]
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_287tu")
 
-[node name="Area2D2" type="Area2D" parent="."]
+[node name="CollisionBody" type="Area2D" parent="." node_paths=PackedStringArray("enemy_state_machine")]
 position = Vector2(0, -9)
 script = ExtResource("4_287tu")
+enemy_state_machine = NodePath("../EnemyStateMachine")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBody"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_0830c")
 
@@ -202,5 +203,5 @@ script = ExtResource("7_mvm2m")
 [node name="Death" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("8_mr2vc")
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
+[connection signal="body_entered" from="CollisionHead" to="CollisionHead" method="_on_body_entered"]
+[connection signal="body_entered" from="CollisionBody" to="CollisionBody" method="_on_body_entered"]

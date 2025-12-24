@@ -7,7 +7,7 @@ var stateName: StringName = PlayerStates.IDLE
 func _ready():
 	current_state = get_node(start_state)
 	current_state.state_machine = self
-	current_state.player = get_parent() as CharacterBody2D
+	current_state.body = get_parent() as CharacterBody2D
 	current_state.enter()
 	
 func change_state(state_name: String):
@@ -19,7 +19,7 @@ func change_state(state_name: String):
 	current_state.exit()
 	current_state = new_state
 	current_state.state_machine = self
-	current_state.player = get_parent() as CharacterBody2D
+	current_state.body = get_parent() as CharacterBody2D
 	current_state.enter()
 
 func _process(delta):

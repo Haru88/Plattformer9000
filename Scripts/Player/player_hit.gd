@@ -5,7 +5,7 @@ extends State
 @export var controlBlockTimeout = 0.3
 
 func enter():
-	body.acceleration = pushBackPower * -body.lastDirection
+	body.CURRENT_ACCELERATION = pushBackPower * -body.LAST_DIRECTION
 	body.move_and_slide()
 	await get_tree().create_timer(controlBlockTimeout).timeout
 	state_machine.change_state(PlayerStates.RUN)

@@ -4,8 +4,8 @@ class_name AnimationController extends Node
 @export var PLAYER: Player
 @export var STATEMACHINE: StateMachine
 
-func _process(delta: float) -> void:
-	self.scale.x = PLAYER.lastDirection
+func _process(_delta: float) -> void:
+	self.scale.x = PLAYER.LAST_DIRECTION
 	
 	if STATEMACHINE.stateName == PlayerStates.HIT:
 		ANIMATION.play("hit")
@@ -24,8 +24,8 @@ func _process(delta: float) -> void:
 			ANIMATION.play("idle")
 
 	if not PLAYER.is_on_floor():
-		if PLAYER.acceleration != 0:
-			ANIMATION.scale.x = 1.0 if PLAYER.acceleration > 0 else -1.0
+		if PLAYER.CURRENT_ACCELERATION != 0:
+			ANIMATION.scale.x = 1.0 if PLAYER.CURRENT_ACCELERATION > 0 else -1.0
 		if PLAYER.is_on_wall() && PLAYER.is_falling() && PLAYER.is_pressing_against_wall():
 			ANIMATION.play("wall")
 			return

@@ -1,6 +1,6 @@
 extends TextureRect
 
-@onready var baseOffset = self.position.x
+@onready var baseOffset: float = self.position.x
 @export var tempo: float
 
 func _process(delta: float) -> void:

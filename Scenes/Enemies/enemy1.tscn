@@ -136,9 +136,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dhkrs")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
-"speed": 15.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1f0kj"]
@@ -162,6 +162,7 @@ ANIMATION = NodePath("AnimatedSprite2D")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vt4ob")
 animation = &"death"
+autoplay = "Run"
 
 [node name="RayRightEnd" type="RayCast2D" parent="."]
 position = Vector2(15, -1)
@@ -178,6 +179,7 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_1f0kj")
 
 [node name="CollisionHead" type="Area2D" parent="."]
+visible = false
 script = ExtResource("3_afpow")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionHead"]

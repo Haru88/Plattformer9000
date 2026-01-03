@@ -6,16 +6,16 @@ class_name Player extends CharacterBody2D
 @export var audioPlayer: AudioStreamPlayer
 
 @export_group("PlayerStats")
-@export var walkSpeed = 5000
-@export var jumpSpeed = 330
-@export var friction = 300
-@export var acceleration_step = 600
-@export var acceleration_run = 400
-@export var max_acceleration = 5000
-@export var max_acceleration_run = 10000
+@export var walkSpeed: float = 5000
+@export var jumpSpeed: float = 330
+@export var friction: float = 300
+@export var acceleration_step: float = 600
+@export var acceleration_run: float = 400
+@export var max_acceleration: float = 5000
+@export var max_acceleration_run: float = 10000
 
-var CURRENT_ACCELERATION = 0
-var LAST_DIRECTION = 1.0
+var CURRENT_ACCELERATION: float = 0
+var LAST_DIRECTION: float = 1.0
 
 func _physics_process(delta: float) -> void:
 	
